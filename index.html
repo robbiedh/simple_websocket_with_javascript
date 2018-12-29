@@ -1,0 +1,23 @@
+<script src="/socket.io/socket.io.js"></script> 
+<script>
+  var socket = io.connect('http://belajar-node-js-robbie-dev.c9users.io/');
+// socket.on untuk menangkap pesan dari server dengan variable echo_data
+  socket.on("echo_data",function(data){
+    console.log(data);
+    document.getElementById("echo_pesan").value =data; //data ditampilkan  ke  input ber id echo_pesan
+    
+  })
+    
+  window.addEventListener("load", function(){ //when page onload maka  bagian akandi jalankan 
+  var lightbox = document.getElementById("data_masuk"); 
+  lightbox.addEventListener("change", function() { //  addlistener ketika   input berubah maka akan menjalankan code di bagian dalam  
+    var x = document.getElementById("data_masuk").value; // mendapatkan  nilau dair  id data_mausk
+    socket.emit("data_dari_client", x); //  emit beratri  mengirimkan data, variable "data_dari_client"
+    
+  });
+  
+});
+  
+</script>
+Iput Pesan :<input type="text" id="data_masuk" name="data_masuk" /><br>
+hasil Echo Pesan  : <input type="text" id="echo_pesan" name="echo_pesan" /> <br>
